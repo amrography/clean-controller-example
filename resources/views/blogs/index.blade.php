@@ -1,6 +1,12 @@
 <x-dashboard-app-full>
     <x-dashboard::container>
         <x-dashboard::card.table title="Blogs list">
+            <x-slot name="cardHeader">
+                <x-dashboard::button :href="route('blogs.create')" class="w-40" color="success">
+                    Create a new blog
+                </x-dashboard::button>
+            </x-slot>
+
             <thead>
                 <tr>
                     <th>ID</th>

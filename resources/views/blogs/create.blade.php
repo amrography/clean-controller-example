@@ -11,11 +11,6 @@
                     Blog title
                 </x-dashboard::form.input>
 
-                <x-dashboard::form.input type="text"
-                    name="slug">
-                    Blog slug
-                </x-dashboard::form.input>
-
                 <div style="width: 200px">
                     <x-dashboard::form.image name="image">
                         Choose an image

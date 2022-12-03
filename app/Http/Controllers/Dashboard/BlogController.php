@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,11 +26,10 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('create', Blog::class);
+        Auth::user()->hasPermissionTo('Create blog');
 
         $data = $request->all();
         $validator = Validator::make($data, [
-            'slug' => 'required|string|unique:blogs',
             'title' => 'required|string',
             'image' => 'required|image',
             'body' => 'required|string|max:1000'
@@ -53,7 +54,7 @@ class BlogController extends Controller
         $request->user()
             ->blogs()
             ->create([
-                'slug' => $data['slug'],
+                'slug' => Str::slug($data['title']),
                 'title' => $data['title'],
                 'body' => $data['body'],
                 'image' => $data['image'],
