@@ -5,6 +5,12 @@
                 Create a new blog
             </x-slot>
 
+            @foreach ($errors->all() as $error)
+                <x-dashboard::alert color="danger">
+                    {{ $error }}
+                </x-dashboard::alert>
+            @endforeach
+
             <x-dashboard::form :action="route('blogs.store')">
                 <x-dashboard::form.input type="text"
                     name="title">
